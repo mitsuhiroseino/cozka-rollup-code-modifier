@@ -1,1 +1,1 @@
-# gusok-rollup-code-modifier
+# @gusok/rollup-code-modifier
