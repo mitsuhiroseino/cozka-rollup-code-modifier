@@ -6,33 +6,35 @@ import path from 'path';
  */
 export type CodeModifierConfig = {
   /**
-   * 文字列置換の設定
+   * 文字列変換の設定
    */
-  replacers?: ReplacerConfig[];
+  modifiers?: ModifierConfig[];
 };
 
 /**
- * 文字列置換設定
+ * 文字列変換設定
  */
-export type ReplacerConfig = FunctionReplacerConfig | PatternReplacerConfig;
+export type ModifierConfig =
+  | CustomFunctionModifierConfig
+  | PatternBasedModifierConfig;
 
 /**
- * 関数文字列置換設定
+ * 関数文字列編集設定
  */
-export type FunctionReplacerConfig = ReplacerConfigBase & {
+export type CustomFunctionModifierConfig = ModifierConfigBase & {
   /**
-   * 任意の置換処理を行う関数
+   * 任意の変換処理を行う関数
    * @param code ソースコード
    * @param targetPath `/`区切りの相対パス
-   * @returns 置換処理後のソースコード
+   * @returns 変換処理後のソースコード
    */
-  replace: (code: string, id: string) => string;
+  modify: (code: string, targetPath: string) => string;
 };
 
 /**
  * パターン文字列置換設定
  */
-export type PatternReplacerConfig = ReplacerConfigBase & {
+export type PatternBasedModifierConfig = ModifierConfigBase & {
   /**
    * ファイルの内容の置換を行う際のパターン\
    * `replacer`が指定されている場合は無効
@@ -47,11 +49,11 @@ export type PatternReplacerConfig = ReplacerConfigBase & {
 };
 
 /**
- * 文字列置換設定ベース
+ * 編集設定ベース
  */
-export type ReplacerConfigBase = {
+export type ModifierConfigBase = {
   /**
-   * 置換処理の対象を判定するための正規表現\
+   * 編集処理の対象を判定するための正規表現\
    * `/`区切りの相対パスに対して判定を行う\
    * 文字列の場合は部分一致、正規表現の場合はtestメソッドで判定\
    * 未指定の場合は全ファイルが対象
@@ -63,7 +65,7 @@ export type ReplacerConfigBase = {
  * トランスパイル後のソースコードを設定に従い編集するプラグイン
  */
 export default function CodeModifier(config: CodeModifierConfig): Plugin {
-  const { replacers = [] } = config;
+  const { modifiers = [] } = config;
   return {
     name: 'code-modifier',
     options(options) {
@@ -81,19 +83,19 @@ export default function CodeModifier(config: CodeModifierConfig): Plugin {
       const relativePath = path.relative(process.cwd(), id);
       const normalizedPath = relativePath.replace(/\\/g, '/');
       let modifiedCode = code;
-      for (const replacer of replacers) {
-        const target = replacer.target;
+      for (const modifier of modifiers) {
+        const target = modifier.target;
         if (
           !target ||
           (typeof target === 'string'
             ? normalizedPath.includes(target)
             : target.test(normalizedPath))
         ) {
-          if ('replace' in replacer) {
-            modifiedCode = replacer.replace(code, normalizedPath);
+          if ('modify' in modifier) {
+            modifiedCode = modifier.modify(code, normalizedPath);
           } else {
             // @ts-ignore
-            modifiedCode.replace(replacer.pattern, replacer.replacement);
+            modifiedCode.replace(modifier.pattern, modifier.replacement);
           }
         }
       }
