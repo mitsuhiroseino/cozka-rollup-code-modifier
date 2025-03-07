@@ -559,9 +559,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gusok/rollup-code-modifier@workspace:.":
+"@cozka/rollup-code-modifier@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@gusok/rollup-code-modifier@workspace:."
+  resolution: "@cozka/rollup-code-modifier@workspace:."
   dependencies:
     "@types/fs-extra": "npm:^11"
     "@types/jest": "npm:^29.5.14"

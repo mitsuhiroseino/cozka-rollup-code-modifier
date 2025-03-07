@@ -1,9 +1,9 @@
 {
-  "name": "@gusok/rollup-code-modifier",
-  "version": "0.1.2",
+  "name": "@cozka/rollup-code-modifier",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mitsuhiroseino/gusok-rollup-code-modifier.git"
+    "url": "https://github.com/mitsuhiroseino/cozka-rollup-code-modifier.git"
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",

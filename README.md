@@ -1,13 +1,13 @@
-# @gusok/rollup-code-modifier
+# @cozka/rollup-code-modifier
 
-`@gusok/rollup-code-modifier` is a Rollup plugin that allows you to modify the transpiled code based on a custom configuration. You can use it to perform various string replacements or transformations on the source code during the bundling process.
+`@cozka/rollup-code-modifier` is a Rollup plugin that allows you to modify the transpiled code based on a custom configuration. You can use it to perform various string replacements or transformations on the source code during the bundling process.
 
 **[日本語のREADMEはこちら](./README.ja.md)**
 
 ## Installation
 
 ```sh
-npm install @gusok/rollup-code-modifier
+npm install @cozka/rollup-code-modifier
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install @gusok/rollup-code-modifier
 To use the plugin, add it to your `rollup.config.js` file as follows:
 
 ```javascript
-import CodeModifier from '@gusok/rollup-code-modifier';
+import CodeModifier from '@cozka/rollup-code-modifier';
 
 export default {
   input: 'src/index.js',

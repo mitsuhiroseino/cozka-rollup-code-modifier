@@ -1,13 +1,13 @@
-# @gusok/rollup-code-modifier
+# @cozka/rollup-code-modifier
 
-`@gusok/rollup-code-modifier` は、カスタム設定に基づいてトランスパイル後のコードを変更する Rollup プラグインです。コードの文字列置換や変換をバンドル中に行うことができます。
+`@cozka/rollup-code-modifier` は、カスタム設定に基づいてトランスパイル後のコードを変更する Rollup プラグインです。コードの文字列置換や変換をバンドル中に行うことができます。
 
 **[English READMEはこちら](./README.md)**
 
 ## インストール
 
 ```sh
-npm install @gusok/rollup-code-modifier
+npm install @cozka/rollup-code-modifier
 ```
 
 ## 使い方
@@ -15,7 +15,7 @@ npm install @gusok/rollup-code-modifier
 プラグインを使用するには、`rollup.config.js` ファイルに以下のように追加します：
 
 ```javascript
-import CodeModifier from '@gusok/rollup-code-modifier';
+import CodeModifier from '@cozka/rollup-code-modifier';
 
 export default {
   input: 'src/index.js',
